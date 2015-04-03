@@ -17,6 +17,8 @@
     //   Brand::deleteAll();
     // }
 
+
+    //GETTERS
     function test_getName()
     {
       //ARRANGE
@@ -30,20 +32,36 @@
       $this->assertEquals($name, $result);
     }
 
+    function test_getId()
+    {
+      //ARRANGE
+      $name = "Blundstone";
+      $id = 8;
+      $test_brand = new Brand($name, $id);
+
+      //ACT
+      $result = $test_brand->getId();
+
+      //ASSERT
+      $this->assertEquals(8, $result);
+    }
+
+
     function test_setName()
     {
-        //Arrange
-        $name = "Doc Marten";
+        //ARRANGE
+        $name = "Blundstone";
         $test_brand = new Brand($name);
 
-        $new_name = "Niwell";
+        $new_name = "Danner";
 
-        //Act
+        //ACT
         $test_brand->setName($new_name);
 
-        //Assert
+        //ASSERT
         $this->assertEquals($new_name, $test_brand->getName());
     }
+
 
   }
 
