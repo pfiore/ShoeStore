@@ -18,7 +18,7 @@
     // }
 
 
-    //GETTERS
+    //GETTERS----------------------------
     function test_getName()
     {
       //ARRANGE
@@ -46,7 +46,7 @@
       $this->assertEquals(8, $result);
     }
 
-
+    //SETTERS-------------------------------
     function test_setName()
     {
         //ARRANGE
@@ -62,6 +62,20 @@
         $this->assertEquals($new_name, $test_brand->getName());
     }
 
+    function test_setId()
+    {
+      //ARRANGE
+      $name = "Blundstone";
+      $id = 8;
+      $test_brand = new Brand($name, $id);
+
+      //ACT
+      $test_brand->setId(6);
+
+      //ASSERT
+      $result = $test_brand->getId();
+      $this->assertEquals(6, $result);
+    }
 
   }
 

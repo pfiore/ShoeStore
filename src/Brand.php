@@ -8,7 +8,7 @@
       $this->name = $name;
       $this->id = $id;
     }
-    //Getters
+    //Getters------------------------------------
     function getName()
     {
       return $this->name;
@@ -18,13 +18,17 @@
     {
       return $this->id;
     }
-    //Setter
+
+    //Setter--------------------------------------
     function setName($new_name)
     {
         $this->name = (string) $new_name;
     }
 
-
+    function setId($new_id)
+    {
+      $this->id = (int) $new_id;
+    }
 
   }
 
