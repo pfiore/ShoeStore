@@ -77,6 +77,43 @@
       $this->assertEquals(6, $result);
     }
 
+    function test_getAll()
+    {
+      //ASSERT
+      $name = "Blundstone";
+      $id = 1;
+      $test_brand = new Brand($name, $id);
+      $test_brand->save();
+
+      $name2 = "Airwalks";
+      $id2 = 2;
+      $test_brand2 = new Brand($brand_name2, $id2);
+      $test_brand2->save();
+      
+      //ACT
+      $result = Brand::getALL();
+
+      //ASSERT
+      $this->assertEquals([$test_brand, $test_brand2], $result);
+    }
+
+
+    // function test_save()
+    // {
+    //   //ARRANGE
+    //   $name = "Blundstone";
+    //   $id = 1;
+    //   $test_brand = new Brand($name, $id);
+    //
+    //   //ACT
+    //   $test_brand->save();
+    //
+    //   //ASSERT
+    //   $result = Brand::getAll();
+    //   $this->assertEquals([$test_brand], $result);
+    //
+    // }
+
   }
 
 

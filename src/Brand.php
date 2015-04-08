@@ -30,6 +30,20 @@
       $this->id = (int) $new_id;
     }
 
+    //Static
+
+    static function getAll()
+    {
+      $returned_brands = $GLOBALS['DB']
+    }
+    //Save--------------------
+    function save()
+    {
+      $statement = $GLOBALS['DB']->query("INSERT INTO brands (name) VALUES ('{$this->getName()}') RETURNING id;");
+      $result = $statement->fetch(PDO::FETCH_ASSOC);
+      $this->setId($result['id']);
+    }
+
   }
 
 
