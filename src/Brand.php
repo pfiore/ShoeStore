@@ -63,7 +63,20 @@
       $GLOBALS['DB']->exec("DELETE FROM brands *;");
     }
 
+    //Find ---------------------
+    static function find($search_id)
+    {
+      $found_brand = null;
+      $brands = Brand::getAll();
+      foreach($brands as $my_brand){
+        $brand_id = $my_brand->getId();
+        if ($brand_id == $search_id){
+          $found_brand = $my_brand;
+        }
+      }
+      return $found_brand;
 
+    }
 
   }
 
