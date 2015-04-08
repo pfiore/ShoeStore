@@ -75,7 +75,12 @@
         }
       }
       return $found_brand;
+    }
 
+    //add store, joins a store to a brand
+    function addStore($store)
+    {
+      $GLOBALS['DB']->exec("INSER INTO stores_brands (store_id, brand_id) VALUES ({$store->getId()}, {$this->getId()});");
     }
 
   }
