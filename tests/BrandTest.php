@@ -5,17 +5,18 @@
   * @backupStaticAttributes disabled
   */
 
+  // require_once "src/Store.php";
   require_once "src/Brand.php";
 
   $DB = new PDO('pgsql:host=localhost;dbname=shoes_test');
 
   class BrandTest extends PHPUnit_Framework_TestCase
   {
-    // protected function tearDown()
-    // {
-    //   Store::deleteAll();
-    //   Brand::deleteAll();
-    // }
+    protected function tearDown()
+    {
+      // Store::deleteAll();
+      Brand::deleteAll();
+    }
 
 
     //GETTERS----------------------------
@@ -87,9 +88,9 @@
 
       $name2 = "Airwalks";
       $id2 = 2;
-      $test_brand2 = new Brand($brand_name2, $id2);
+      $test_brand2 = new Brand($name2, $id2);
       $test_brand2->save();
-      
+
       //ACT
       $result = Brand::getALL();
 
@@ -98,21 +99,35 @@
     }
 
 
-    // function test_save()
-    // {
-    //   //ARRANGE
-    //   $name = "Blundstone";
-    //   $id = 1;
-    //   $test_brand = new Brand($name, $id);
-    //
-    //   //ACT
-    //   $test_brand->save();
-    //
-    //   //ASSERT
-    //   $result = Brand::getAll();
-    //   $this->assertEquals([$test_brand], $result);
-    //
-    // }
+    function test_save()
+    {
+      //ARRANGE
+      $name = "Blundstone";
+      $id = 1;
+      $test_brand = new Brand($name, $id);
+
+      //ACT
+      $test_brand->save();
+
+      //ASSERT
+      $result = Brand::getAll();
+      $this->assertEquals([$test_brand], $result);
+
+    }
+
+    function test_deleteAll()
+    {
+    //ARRANGE
+    $name = "Blundstone";
+    $id = 1;
+    $test_brand = new Brand($name, $id);
+    $test_brand->save();
+    //ACT
+    Brand::deleteAll();
+    //ASSERT
+    $result = Brand::getAll();
+    $this->assertEquals([], $result);
+    }
 
   }
 
