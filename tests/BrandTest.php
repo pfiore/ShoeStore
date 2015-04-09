@@ -19,7 +19,6 @@
 
     }
 
-
     //GETTERS----------------------------
     function test_getName()
     {
@@ -78,7 +77,7 @@
       $result = $test_brand->getId();
       $this->assertEquals(6, $result);
     }
-
+    //SAVE
     function test_save()
     {
       //ARRANGE
@@ -94,7 +93,7 @@
       $this->assertEquals([$test_brand], $result);
 
     }
-
+    //Delete ALL
     function test_deleteAll()
     {
     //ARRANGE
@@ -109,7 +108,7 @@
     $this->assertEquals([], $result);
     }
 
-
+    //Get ALL
     function test_getAll()
     {
       //ASSERT
@@ -129,7 +128,7 @@
       //ASSERT
       $this->assertEquals([$test_brand, $test_brand2], $result);
     }
-
+    //FIND
     function test_find()
     {
       //ARRANGE
@@ -147,7 +146,7 @@
       //ASSERT
       $this->assertEquals($test_brand, $result);
     }
-
+    //ADD STORE
     function test_addStore()
     {
       //ARRANGE
@@ -155,9 +154,9 @@
       $test_brand = new Brand($name);
       $test_brand->save();
 
-      // $name1 = "Blundstone Store";
-      // $test_store = new Store($name1);
-      // $test_store->save();
+      $name1 = "Blundstone Store";
+      $test_store = new Store($name1);
+      $test_store->save();
 
       //ACT
       $test_brand->addStore($test_store);
@@ -166,10 +165,30 @@
       $result = $test_brand->getStores();
       $this->assertEquals([$test_store], $result);
     }
+    //Get Store
+    function test_getStores()
+    {
+      //ARRANGE
+      $name = "Blundstone";
+      $test_brand = new Brand($name);
+      $test_brand->save();
 
+      $name1 = "Blundstone Store";
+      $test_store = new Store($name1);
+      $test_store->save();
 
+      $name2 = "Airwalk Store";
+      $test_store2 = new Store($name2);
+      $test_store2->save();
 
+      $test_brand->addStore($test_store);
+      $test_brand->addStore($test_store2);
 
+      //ACT
+      $result = $test_brand->getStores();
 
+      //ASSERT
+      $this->assertEquals([$test_store, $test_store2], $result);
+    }
   }
 ?>

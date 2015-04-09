@@ -35,9 +35,7 @@
     //Save--------------------
     function save()
     {
-      $statement = $GLOBALS['DB']->query("INSERT INTO brands (name)
-                                          VALUES ('{$this->getName()}')
-                                          RETURNING id;");
+      $statement = $GLOBALS['DB']->query("INSERT INTO brands (name) VALUES ('{$this->getName()}') RETURNING id;");
       $result = $statement->fetch(PDO::FETCH_ASSOC);
       $this->setId($result['id']);
     }
@@ -80,7 +78,19 @@
     //add store, joins a store to a brand
     function addStore($store)
     {
-      $GLOBALS['DB']->exec("INSER INTO stores_brands (store_id, brand_id) VALUES ({$store->getId()}, {$this->getId()});");
+      $GLOBALS['DB']->exec("INSERT INTO stores_brands (store_id, brand_id) VALUES ({$store->getId()}, {$this->getId()});");
+    }
+
+    function getStores()
+    {
+      $stores = array();
+      $returned_stores = $GLOBALS['DB']->query("SELECT stores.* FROM brands JOIN stores_brand ON (brands.id = stores_brands.brand.id) JOIN stores ON (stores.id = stores_brands.store_id) WHERE brand_id = {$this->getId()};");
+      foreach ($returned_stores as $store) {
+        $name = $store['name'];
+        $id = $store['id'];
+        $new_store = new Store($name, $id);
+        array_push($stores, $new_store);
+      }
     }
 
   }
