@@ -5,7 +5,7 @@
   * @backupStaticAttributes disabled
   */
 
-  // require_once "src/Store.php";
+  require_once "src/Store.php";
   require_once "src/Brand.php";
 
   $DB = new PDO('pgsql:host=localhost;dbname=shoes_test');
@@ -14,7 +14,7 @@
   {
     protected function tearDown()
     {
-      // Store::deleteAll();
+      Store::deleteAll();
       Brand::deleteAll();
 
     }
@@ -91,7 +91,6 @@
       //ASSERT
       $result = Brand::getAll();
       $this->assertEquals([$test_brand], $result);
-
     }
     //Delete ALL
     function test_deleteAll()
