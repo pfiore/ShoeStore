@@ -88,6 +88,30 @@
             $this->setName($new_name);
         }
 
+        //get brands
+
+        function getBrands()
+        {
+            $brands = array();
+            $returned_brands = $GLOBALS['DB']->query("SELECT brands.* FROM stores
+                                                      JOIN stores_brands ON (stores.id = stores_brands.store_id)
+                                                      JOIN brands ON (brands.id = stores_brands.brand_id)
+                                                      WHERE stores.id = {$this->getId()};");
+            foreach($returned_brands as $brand) {
+              $name = $brand['name'];
+              $id = $brand['id'];
+              $new_brand = new Brand($name, $id);
+              array_push($brands, $new_brand);
+            }
+            return $brands;
+        }
+
+
+        //add brand to store DB
+        function addBrand($new_brand)
+        {
+          $GLOBALS['DB']->exec("INSERT INTO stores_brands (brand_id, store_id) VALUES ({$this->getId()}, {$new_brand->getId()});");
+        }
 
     }
 ?>
