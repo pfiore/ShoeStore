@@ -129,6 +129,7 @@
         $result = Store::getAll();
         $this->assertEquals([], $result);
       }
+      //find one---------------------------
 
       function test_find()
       {
@@ -146,10 +147,27 @@
 
         //ASSERT
         $this->assertEquals($test_store, $result);
-        
+
       }
 
+      function test_delete()
+      {
+        //ARRANGE
+        $name = "Blundstone store";
+        $test_store = new Store($name);
+        $test_store->save();
 
+        $name2 = "Airwalks store";
+        $test_store2 = new Store($name2);
+        $test_store2->save();
+
+        //ACT
+        $test_store->delete();
+
+        //ASSERT
+        $result = Store::getAll();
+        $this->assertEquals([$test_store2], $result);
+      }
 
 
     }

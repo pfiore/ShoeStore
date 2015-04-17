@@ -61,7 +61,7 @@
           $GLOBALS['DB']->exec("DELETE FROM stores *;");
         }
 
-        //find single
+        //find single-------------------
         static function find($search_id)
         {
           $found_store = null;
@@ -73,6 +73,11 @@
             }
           }
           return $found_store;
+        }
+        //delete one--------------------
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM stores WHERE id = {$this->getId()};");
         }
 
     }
